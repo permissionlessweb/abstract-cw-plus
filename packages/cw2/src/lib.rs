@@ -38,7 +38,7 @@ pub struct ContractVersion {
     pub version: String,
 }
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum VersionError {
     #[error(transparent)]
     Std(#[from] StdError),
@@ -156,18 +156,19 @@ mod tests {
 
         // error if contract version is not set
         let err = assert_contract_version(&store, EXPECTED_CONTRACT, EXPECTED_VERSION).unwrap_err();
-        assert_eq!(err, VersionError::NotFound);
+        assert_eq!(err.to_string(), VersionError::NotFound.to_string());
 
         // wrong contract name
         let wrong_contract = "crate:cw20-base";
         set_contract_version(&mut store, wrong_contract, EXPECTED_VERSION).unwrap();
         let err = assert_contract_version(&store, EXPECTED_CONTRACT, EXPECTED_VERSION).unwrap_err();
         assert_eq!(
-            err,
+            err.to_string(),
             VersionError::WrongContract {
                 expected: EXPECTED_CONTRACT.into(),
                 found: wrong_contract.into()
-            },
+            }
+            .to_string(),
         );
 
         // wrong contract version
@@ -175,11 +176,12 @@ mod tests {
         set_contract_version(&mut store, EXPECTED_CONTRACT, wrong_version).unwrap();
         let err = assert_contract_version(&store, EXPECTED_CONTRACT, EXPECTED_VERSION).unwrap_err();
         assert_eq!(
-            err,
+            err.to_string(),
             VersionError::WrongVersion {
                 expected: EXPECTED_VERSION.into(),
                 found: wrong_version.into()
-            },
+            }
+            .to_string(),
         );
 
         // correct name and version

@@ -32,7 +32,7 @@ where
 #[derive(QueryResponses, cw_orch::QueryFns)]
 pub enum QueryMsg<T = Empty>
 where
-    T: Clone + fmt::Debug + PartialEq + JsonSchema,
+    T: Clone + fmt::Debug + PartialEq,
 {
     /// Shows all admins and whether or not it is mutable
     #[returns(AdminListResponse)]

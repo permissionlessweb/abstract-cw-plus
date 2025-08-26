@@ -1,0 +1,15 @@
+[package]
+name = "easy-addr"
+version = "3.0.0"
+edition = "2021"
+publish = false
+
+[lib]
+proc-macro = true
+
+[dependencies]
+cosmwasm-schema = { version = "3.0.0" }
+cosmwasm-std = { version = "3.0.0" }
+proc-macro2 = "1"
+quote = "1"
+syn = { version = "1.0.6", features = ["full", "printing", "extra-traits"] }

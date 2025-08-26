@@ -48,7 +48,7 @@ pub enum ReceiveMsg {
 }
 
 #[cw_serde]
-#[derive(QueryResponses, cw_orch::QueryFns)]
+#[derive(QueryResponses)]
 pub enum QueryMsg {
     /// Claims shows the tokens in process of unbonding for this address
     #[returns(cw_controllers::ClaimsResponse)]

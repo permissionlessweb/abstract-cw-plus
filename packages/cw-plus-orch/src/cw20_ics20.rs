@@ -7,15 +7,15 @@ use cw20_ics20::{
 };
 use cw_orch::interface;
 
+#[cfg(not(target_arch = "wasm32"))]
+use cw_orch::prelude::*;
+
 pub use cw20_ics20::msg::{AllowMsg, ExecuteMsg, InitMsg, MigrateMsg, QueryMsg, TransferMsg};
 #[cfg(not(target_arch = "wasm32"))]
 pub use interfaces::{AsyncQueryMsgInterfaceFns, ExecuteMsgInterfaceFns, QueryMsgInterfaceFns};
 
 #[interface(InitMsg, ExecuteMsg, QueryMsg, MigrateMsg)]
 pub struct Cw20Ics20;
-
-#[cfg(not(target_arch = "wasm32"))]
-use cw_orch::prelude::*;
 
 #[cfg(not(target_arch = "wasm32"))]
 impl<Chain: CwEnv> Uploadable for Cw20Ics20<Chain> {

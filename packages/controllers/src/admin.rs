@@ -16,7 +16,7 @@ pub struct AdminResponse {
 }
 
 /// Errors returned from Admin
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum AdminError {
     #[error("{0}")]
     Std(#[from] StdError),
@@ -26,11 +26,10 @@ pub enum AdminError {
 }
 
 // state/logic
-pub struct Admin<'a>(Item<'a, Option<Addr>>);
+pub struct Admin(Item<Option<Addr>>);
 
-// this is the core business logic we expose
-impl<'a> Admin<'a> {
-    pub const fn new(namespace: &'a str) -> Self {
+impl Admin {
+    pub const fn new(namespace: &'static str) -> Self {
         Admin(Item::new(namespace))
     }
 
@@ -101,9 +100,10 @@ impl<'a> Admin<'a> {
 mod tests {
     use super::*;
 
-    use cosmwasm_std::testing::{mock_dependencies, mock_info};
+    use cosmwasm_std::testing::{message_info, mock_dependencies};
     use cosmwasm_std::Empty;
 
+    use easy_addr::addr;
     #[test]
     fn set_and_get_admin() {
         let mut deps = mock_dependencies();
@@ -135,16 +135,16 @@ mod tests {
         assert!(!(control.is_admin(deps.as_ref(), &imposter).unwrap()));
         control.assert_admin(deps.as_ref(), &owner).unwrap();
         let err = control.assert_admin(deps.as_ref(), &imposter).unwrap_err();
-        assert_eq!(AdminError::NotAdmin {}, err);
+        assert_eq!(AdminError::NotAdmin {}.to_string(), err.to_string());
 
         // ensure checks proper with owner None
         control.set(deps.as_mut(), None).unwrap();
         assert!(!(control.is_admin(deps.as_ref(), &owner).unwrap()));
         assert!(!(control.is_admin(deps.as_ref(), &imposter).unwrap()));
         let err = control.assert_admin(deps.as_ref(), &owner).unwrap_err();
-        assert_eq!(AdminError::NotAdmin {}, err);
+        assert_eq!(AdminError::NotAdmin {}.to_string(), err.to_string());
         let err = control.assert_admin(deps.as_ref(), &imposter).unwrap_err();
-        assert_eq!(AdminError::NotAdmin {}, err);
+        assert_eq!(AdminError::NotAdmin {}.to_string(), err.to_string());
     }
 
     #[test]
@@ -163,15 +163,15 @@ mod tests {
         assert_eq!(Some(owner.to_string()), res.admin);
 
         // imposter cannot update
-        let info = mock_info(imposter.as_ref(), &[]);
+        let info = message_info(&imposter, &[]);
         let new_admin = Some(friend.clone());
         let err = control
             .execute_update_admin::<Empty, Empty>(deps.as_mut(), info, new_admin.clone())
             .unwrap_err();
-        assert_eq!(AdminError::NotAdmin {}, err);
+        assert_eq!(AdminError::NotAdmin {}.to_string(), err.to_string());
 
         // owner can update
-        let info = mock_info(owner.as_ref(), &[]);
+        let info = message_info(&owner, &[]);
         let res = control
             .execute_update_admin::<Empty, Empty>(deps.as_mut(), info, new_admin)
             .unwrap();

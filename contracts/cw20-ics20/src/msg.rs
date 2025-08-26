@@ -1,5 +1,5 @@
-use abstract_cw20::Cw20ReceiveMsg;
 use cosmwasm_schema::{cw_serde, QueryResponses};
+use abstract_cw20::Cw20ReceiveMsg;
 
 use crate::amount::Amount;
 use crate::state::ChannelInfo;
@@ -57,7 +57,7 @@ pub struct TransferMsg {
 }
 
 #[cw_serde]
-#[derive(QueryResponses, cw_orch::QueryFns)]
+#[derive(QueryResponses)]
 pub enum QueryMsg {
     /// Return the port ID bound by this contract.
     #[returns(PortResponse)]

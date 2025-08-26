@@ -1,12 +1,12 @@
 use crate::msg::{AdminListResponse, ExecuteMsg, InstantiateMsg, QueryMsg};
 use abstract_cw1::Cw1Contract;
-use anyhow::{anyhow, Result};
 use assert_matches::assert_matches;
 use cosmwasm_std::{
-    to_json_binary, Addr, CosmosMsg, Empty, QueryRequest, StdError, WasmMsg, WasmQuery,
+    to_json_binary, Addr, CosmosMsg, Empty, QueryRequest, StdError, StdResult, WasmMsg, WasmQuery,
 };
 use cw_multi_test::{App, AppResponse, Contract, ContractWrapper, Executor};
 use derivative::Derivative;
+use easy_addr::addr;
 use serde::{de::DeserializeOwned, Serialize};
 
 fn mock_app() -> App {
@@ -35,12 +35,17 @@ pub struct Suite {
 }
 
 impl Suite {
-    pub fn init() -> Result<Suite> {
+    pub fn init() -> StdResult<Suite> {
         let mut app = mock_app();
-        let owner = "owner".to_owned();
+        let owner = Addr::unchecked(addr!("owner"));
+
         let cw1_id = app.store_code(contract_cw1());
 
-        Ok(Suite { app, owner, cw1_id })
+        Ok(Suite {
+            app,
+            owner: owner.to_string(),
+            cw1_id,
+        })
     }
 
     pub fn instantiate_cw1_contract(&mut self, admins: Vec<String>, mutable: bool) -> Cw1Contract {
@@ -63,7 +68,7 @@ impl Suite {
         sender_contract: Addr,
         target_contract: &Addr,
         msg: M,
-    ) -> Result<AppResponse>
+    ) -> StdResult<AppResponse>
     where
         M: Serialize + DeserializeOwned,
     {
@@ -81,7 +86,7 @@ impl Suite {
                 &execute,
                 &[],
             )
-            .map_err(|err| anyhow!(err))
+            .map_err(|err| err)
     }
 
     pub fn query<M>(&self, target_contract: Addr, msg: M) -> Result<AdminListResponse, StdError>

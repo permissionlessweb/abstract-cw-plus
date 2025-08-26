@@ -487,7 +487,7 @@ fn list_voters(
 
 #[cfg(test)]
 mod tests {
-    use cosmwasm_std::{coin, coins, Addr, BankMsg, Coin, Decimal, Timestamp, Uint128};
+    use cosmwasm_std::{coin, coins, Addr, BankMsg, Coin, Decimal, Timestamp, Uint128, Uint256};
 
     use abstract_cw2::{query_contract_info, ContractVersion};
     use abstract_cw20::{Cw20Coin, UncheckedDenom};
@@ -727,8 +727,8 @@ mod tests {
             )
             .unwrap_err();
         assert_eq!(
-            ContractError::Threshold(cw_utils::ThresholdError::InvalidThreshold {}),
-            err.downcast().unwrap()
+            ContractError::Threshold(cw_utils::ThresholdError::InvalidThreshold {}).to_string(),
+            err.to_string()
         );
 
         // Total weight less than required weight not allowed
@@ -750,8 +750,8 @@ mod tests {
             )
             .unwrap_err();
         assert_eq!(
-            ContractError::Threshold(cw_utils::ThresholdError::UnreachableWeight {}),
-            err.downcast().unwrap()
+            ContractError::Threshold(cw_utils::ThresholdError::UnreachableWeight {}).to_string(),
+            err.to_string()
         );
 
         // All valid
@@ -818,7 +818,7 @@ mod tests {
         let err = app
             .execute_contract(Addr::unchecked(SOMEBODY), flex_addr.clone(), &proposal, &[])
             .unwrap_err();
-        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+        assert_eq!(ContractError::Unauthorized {}.to_string(), err.to_string());
 
         // Wrong expiration option fails
         let msgs = match proposal.clone() {
@@ -839,7 +839,10 @@ mod tests {
                 &[],
             )
             .unwrap_err();
-        assert_eq!(ContractError::WrongExpiration {}, err.downcast().unwrap());
+        assert_eq!(
+            ContractError::WrongExpiration {}.to_string(),
+            err.to_string()
+        );
 
         // Proposal from voter works
         let res = app
@@ -1050,13 +1053,13 @@ mod tests {
         let err = app
             .execute_contract(Addr::unchecked(OWNER), flex_addr.clone(), &yes_vote, &[])
             .unwrap_err();
-        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+        assert_eq!(ContractError::Unauthorized {}.to_string(), err.to_string());
 
         // Only voters can vote
         let err = app
             .execute_contract(Addr::unchecked(SOMEBODY), flex_addr.clone(), &yes_vote, &[])
             .unwrap_err();
-        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+        assert_eq!(ContractError::Unauthorized {}.to_string(), err.to_string());
 
         // But voter1 can
         let res = app
@@ -1076,7 +1079,7 @@ mod tests {
         let err = app
             .execute_contract(Addr::unchecked(VOTER1), flex_addr.clone(), &yes_vote, &[])
             .unwrap_err();
-        assert_eq!(ContractError::AlreadyVoted {}, err.downcast().unwrap());
+        assert_eq!(ContractError::AlreadyVoted {}.to_string(), err.to_string());
 
         // No/Veto votes have no effect on the tally
         // Compute the current tally
@@ -1107,14 +1110,14 @@ mod tests {
         let err = app
             .execute_contract(Addr::unchecked(VOTER3), flex_addr.clone(), &yes_vote, &[])
             .unwrap_err();
-        assert_eq!(ContractError::AlreadyVoted {}, err.downcast().unwrap());
+        assert_eq!(ContractError::AlreadyVoted {}.to_string(), err.to_string());
 
         // Expired proposals cannot be voted
         app.update_block(expire(voting_period));
         let err = app
             .execute_contract(Addr::unchecked(VOTER4), flex_addr.clone(), &yes_vote, &[])
             .unwrap_err();
-        assert_eq!(ContractError::Expired {}, err.downcast().unwrap());
+        assert_eq!(ContractError::Expired {}.to_string(), err.to_string());
         app.update_block(unexpire(voting_period));
 
         // Powerful voter supports it, so it passes
@@ -1279,8 +1282,8 @@ mod tests {
             .execute_contract(Addr::unchecked(OWNER), flex_addr.clone(), &execution, &[])
             .unwrap_err();
         assert_eq!(
-            ContractError::WrongExecuteStatus {},
-            err.downcast().unwrap()
+            ContractError::WrongExecuteStatus {}.to_string(),
+            err.to_string()
         );
 
         // Vote it, so it passes
@@ -1306,7 +1309,10 @@ mod tests {
         let err = app
             .execute_contract(Addr::unchecked(OWNER), flex_addr.clone(), &closing, &[])
             .unwrap_err();
-        assert_eq!(ContractError::WrongCloseStatus {}, err.downcast().unwrap());
+        assert_eq!(
+            ContractError::WrongCloseStatus {}.to_string(),
+            err.to_string()
+        );
 
         // Execute works. Anybody can execute Passed proposals
         let res = app
@@ -1336,15 +1342,18 @@ mod tests {
         let err = app
             .execute_contract(Addr::unchecked(OWNER), flex_addr.clone(), &closing, &[])
             .unwrap_err();
-        assert_eq!(ContractError::WrongCloseStatus {}, err.downcast().unwrap());
+        assert_eq!(
+            ContractError::WrongCloseStatus {}.to_string(),
+            err.to_string()
+        );
 
         // Trying to execute something that was already executed fails
         let err = app
             .execute_contract(Addr::unchecked(SOMEBODY), flex_addr, &execution, &[])
             .unwrap_err();
         assert_eq!(
-            ContractError::WrongExecuteStatus {},
-            err.downcast().unwrap()
+            ContractError::WrongExecuteStatus {}.to_string(),
+            err.to_string()
         );
     }
 
@@ -1394,7 +1403,7 @@ mod tests {
                 &[],
             )
             .unwrap_err();
-        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+        assert_eq!(ContractError::Unauthorized {}.to_string(), err.to_string());
 
         app.execute_contract(
             Addr::unchecked(Addr::unchecked(VOTER2)), // member of voting group is allowed to execute
@@ -1451,7 +1460,7 @@ mod tests {
                 &[],
             )
             .unwrap_err();
-        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+        assert_eq!(ContractError::Unauthorized {}.to_string(), err.to_string());
 
         let err = app
             .execute_contract(
@@ -1461,7 +1470,7 @@ mod tests {
                 &[],
             )
             .unwrap_err();
-        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+        assert_eq!(ContractError::Unauthorized {}.to_string(), err.to_string());
 
         app.execute_contract(
             Addr::unchecked(Addr::unchecked(VOTER3)), // VOTER3 is allowed to execute
@@ -1545,7 +1554,10 @@ mod tests {
                 &[],
             )
             .unwrap_err();
-        assert_eq!(ContractError::WrongCloseStatus {}, err.downcast().unwrap());
+        assert_eq!(
+            ContractError::WrongCloseStatus {}.to_string(),
+            err.to_string()
+        );
 
         // Execution should now be possible.
         let res = app
@@ -1600,7 +1612,7 @@ mod tests {
         let err = app
             .execute_contract(Addr::unchecked(SOMEBODY), flex_addr.clone(), &closing, &[])
             .unwrap_err();
-        assert_eq!(ContractError::NotExpired {}, err.downcast().unwrap());
+        assert_eq!(ContractError::NotExpired {}.to_string(), err.to_string());
 
         // Expired proposals can be closed
         app.update_block(expire(voting_period));
@@ -1621,7 +1633,10 @@ mod tests {
         let err = app
             .execute_contract(Addr::unchecked(SOMEBODY), flex_addr, &closing, &[])
             .unwrap_err();
-        assert_eq!(ContractError::WrongCloseStatus {}, err.downcast().unwrap());
+        assert_eq!(
+            ContractError::WrongCloseStatus {}.to_string(),
+            err.to_string()
+        );
     }
 
     // uses the power from the beginning of the voting period
@@ -1737,7 +1752,7 @@ mod tests {
         let err = app
             .execute_contract(Addr::unchecked(newbie), flex_addr.clone(), &yes_vote, &[])
             .unwrap_err();
-        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+        assert_eq!(ContractError::Unauthorized {}.to_string(), err.to_string());
 
         // previously removed VOTER3 can still vote, passing the proposal
         app.execute_contract(Addr::unchecked(VOTER3), flex_addr.clone(), &yes_vote, &[])
@@ -1864,7 +1879,7 @@ mod tests {
                 &[],
             )
             .unwrap_err();
-        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+        assert_eq!(ContractError::Unauthorized {}.to_string(), err.to_string());
 
         // extra: ensure no one else can call the hook
         let hook_hack = ExecuteMsg::MemberChangedHook(MemberChangedHookMsg {
@@ -1873,7 +1888,7 @@ mod tests {
         let err = app
             .execute_contract(Addr::unchecked(VOTER2), flex_addr.clone(), &hook_hack, &[])
             .unwrap_err();
-        assert_eq!(ContractError::Unauthorized {}, err.downcast().unwrap());
+        assert_eq!(ContractError::Unauthorized {}.to_string(), err.to_string());
     }
 
     // uses the power from the beginning of the voting period
@@ -2120,7 +2135,7 @@ mod tests {
             }),
         };
 
-        let err: ContractError = app
+        let err = app
             .instantiate_contract(
                 flex_id,
                 Addr::unchecked(OWNER),
@@ -2130,10 +2145,11 @@ mod tests {
                 None,
             )
             .unwrap_err()
-            .downcast()
-            .unwrap();
-
-        assert_eq!(err, ContractError::Deposit(DepositError::InvalidCw20 {}));
+            .to_string();
+        assert_eq!(
+            err,
+            ContractError::Deposit(DepositError::InvalidCw20 {}).to_string()
+        );
 
         // Instantiate with a zero amount.
         let instantiate = InstantiateMsg {
@@ -2148,7 +2164,7 @@ mod tests {
             }),
         };
 
-        let err: ContractError = app
+        let err = app
             .instantiate_contract(
                 flex_id,
                 Addr::unchecked(OWNER),
@@ -2158,10 +2174,11 @@ mod tests {
                 None,
             )
             .unwrap_err()
-            .downcast()
-            .unwrap();
-
-        assert_eq!(err, ContractError::Deposit(DepositError::ZeroDeposit {}))
+            .to_string();
+        assert_eq!(
+            err.to_string(),
+            ContractError::Deposit(DepositError::ZeroDeposit {}).to_string()
+        )
     }
 
     #[test]
@@ -2181,11 +2198,11 @@ mod tests {
                     initial_balances: vec![
                         Cw20Coin {
                             address: VOTER4.to_string(),
-                            amount: Uint128::new(10),
+                            amount: Uint256::new(10),
                         },
                         Cw20Coin {
                             address: OWNER.to_string(),
-                            amount: Uint128::new(10),
+                            amount: Uint256::new(10),
                         },
                     ],
                     mint: None,
@@ -2216,7 +2233,7 @@ mod tests {
             cw20_addr.clone(),
             &abstract_cw20::Cw20ExecuteMsg::IncreaseAllowance {
                 spender: flex_addr.to_string(),
-                amount: Uint128::new(10),
+                amount: Uint256::new(10),
                 expires: None,
             },
             &[],
@@ -2238,7 +2255,7 @@ mod tests {
                 },
             )
             .unwrap();
-        assert_eq!(balance.balance, Uint128::zero());
+        assert_eq!(balance.balance, Uint256::zero());
 
         let balance: abstract_cw20::BalanceResponse = app
             .wrap()
@@ -2249,7 +2266,7 @@ mod tests {
                 },
             )
             .unwrap();
-        assert_eq!(balance.balance, Uint128::new(10));
+        assert_eq!(balance.balance, Uint256::new(10));
 
         app.execute_contract(
             Addr::unchecked(VOTER4),
@@ -2269,7 +2286,7 @@ mod tests {
                 },
             )
             .unwrap();
-        assert_eq!(balance.balance, Uint128::new(10));
+        assert_eq!(balance.balance, Uint256::new(10));
 
         let balance: abstract_cw20::BalanceResponse = app
             .wrap()
@@ -2280,14 +2297,14 @@ mod tests {
                 },
             )
             .unwrap();
-        assert_eq!(balance.balance, Uint128::zero());
+        assert_eq!(balance.balance, Uint256::zero());
 
         app.execute_contract(
             Addr::unchecked(OWNER),
             cw20_addr.clone(),
             &abstract_cw20::Cw20ExecuteMsg::IncreaseAllowance {
                 spender: flex_addr.to_string(),
-                amount: Uint128::new(10),
+                amount: Uint256::new(10),
                 expires: None,
             },
             &[],
@@ -2309,7 +2326,7 @@ mod tests {
                 },
             )
             .unwrap();
-        assert_eq!(balance.balance, Uint128::new(10));
+        assert_eq!(balance.balance, Uint256::new(10));
 
         // Fail the proposal.
         app.execute_contract(
@@ -2344,7 +2361,7 @@ mod tests {
                 },
             )
             .unwrap();
-        assert_eq!(balance.balance, Uint128::new(10));
+        assert_eq!(balance.balance, Uint256::new(10));
     }
 
     #[test]
@@ -2368,7 +2385,7 @@ mod tests {
         app.sudo(SudoMsg::Bank(BankSudo::Mint {
             to_address: OWNER.to_string(),
             amount: vec![Coin {
-                amount: Uint128::new(10),
+                amount: Uint256::new(10),
                 denom: "TOKEN".to_string(),
             }],
         }))
@@ -2381,7 +2398,7 @@ mod tests {
             flex_addr.clone(),
             &proposal,
             &[Coin {
-                amount: Uint128::new(10),
+                amount: Uint256::new(10),
                 denom: "TOKEN".to_string(),
             }],
         )
@@ -2392,7 +2409,7 @@ mod tests {
             .wrap()
             .query_balance(OWNER, "TOKEN".to_string())
             .unwrap();
-        assert_eq!(balance.amount, Uint128::zero());
+        assert_eq!(balance.amount, Uint256::zero());
 
         // Fail the proposal.
         app.execute_contract(
@@ -2422,7 +2439,7 @@ mod tests {
             .wrap()
             .query_balance(OWNER, "TOKEN".to_string())
             .unwrap();
-        assert_eq!(balance.amount, Uint128::zero());
+        assert_eq!(balance.amount, Uint256::zero());
     }
 
     #[test]
@@ -2432,7 +2449,7 @@ mod tests {
         app.sudo(SudoMsg::Bank(BankSudo::Mint {
             to_address: VOTER4.to_string(),
             amount: vec![Coin {
-                amount: Uint128::new(10),
+                amount: Uint256::new(10),
                 denom: "TOKEN".to_string(),
             }],
         }))
@@ -2441,7 +2458,7 @@ mod tests {
         app.sudo(SudoMsg::Bank(BankSudo::Mint {
             to_address: OWNER.to_string(),
             amount: vec![Coin {
-                amount: Uint128::new(10),
+                amount: Uint256::new(10),
                 denom: "TOKEN".to_string(),
             }],
         }))
@@ -2468,7 +2485,7 @@ mod tests {
             flex_addr.clone(),
             &proposal,
             &[Coin {
-                amount: Uint128::new(10),
+                amount: Uint256::new(10),
                 denom: "TOKEN".to_string(),
             }],
         )
@@ -2479,7 +2496,7 @@ mod tests {
             .wrap()
             .query_balance(flex_addr.clone(), "TOKEN")
             .unwrap();
-        assert_eq!(balance.amount, Uint128::new(10));
+        assert_eq!(balance.amount, Uint256::new(10));
 
         app.execute_contract(
             Addr::unchecked(VOTER4),
@@ -2491,7 +2508,7 @@ mod tests {
 
         // Make sure the deposit was returned.
         let balance = app.wrap().query_balance(VOTER4, "TOKEN").unwrap();
-        assert_eq!(balance.amount, Uint128::new(10));
+        assert_eq!(balance.amount, Uint256::new(10));
 
         // Make a proposal that fails.
         let proposal = text_proposal();
@@ -2500,7 +2517,7 @@ mod tests {
             flex_addr.clone(),
             &proposal,
             &[Coin {
-                amount: Uint128::new(10),
+                amount: Uint256::new(10),
                 denom: "TOKEN".to_string(),
             }],
         )
@@ -2510,7 +2527,7 @@ mod tests {
             .wrap()
             .query_balance(flex_addr.clone(), "TOKEN")
             .unwrap();
-        assert_eq!(balance.amount, Uint128::new(10));
+        assert_eq!(balance.amount, Uint256::new(10));
 
         // Fail the proposal.
         app.execute_contract(
@@ -2537,6 +2554,6 @@ mod tests {
 
         // Make sure the deposit was returned despite the proposal failing.
         let balance = app.wrap().query_balance(OWNER, "TOKEN").unwrap();
-        assert_eq!(balance.amount, Uint128::new(10));
+        assert_eq!(balance.amount, Uint256::new(10));
     }
 }

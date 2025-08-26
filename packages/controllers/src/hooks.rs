@@ -18,7 +18,7 @@ pub struct HooksResponse {
     pub hooks: Vec<String>,
 }
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum HookError {
     #[error("{0}")]
     Std(#[from] StdError),
@@ -34,10 +34,10 @@ pub enum HookError {
 }
 
 // store all hook addresses in one item. We cannot have many of them before the contract becomes unusable anyway.
-pub struct Hooks<'a>(Item<'a, Vec<Addr>>);
+pub struct Hooks(Item<Vec<Addr>>);
 
-impl<'a> Hooks<'a> {
-    pub const fn new(storage_key: &'a str) -> Self {
+impl<'a> Hooks {
+    pub const fn new(storage_key: &'static str) -> Self {
         Hooks(Item::new(storage_key))
     }
 

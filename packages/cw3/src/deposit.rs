@@ -4,7 +4,8 @@ use thiserror::Error;
 
 use abstract_cw20::{Denom, UncheckedDenom};
 use cosmwasm_std::{
-    to_json_binary, Addr, BankMsg, Coin, CosmosMsg, Deps, MessageInfo, StdResult, Uint128, WasmMsg,
+    to_json_binary, Addr, BankMsg, Coin, CosmosMsg, Deps, MessageInfo, StdResult, Uint128, Uint256,
+    WasmMsg,
 };
 
 /// Information about the deposit required to create a proposal.
@@ -31,7 +32,7 @@ pub struct UncheckedDepositInfo {
     pub refund_failed_proposals: bool,
 }
 
-#[derive(Error, Debug, PartialEq, Eq)]
+#[derive(Error, Debug, PartialEq)]
 pub enum DepositError {
     #[error("Invalid zero deposit. Set the deposit to None to have no deposit.")]
     ZeroDeposit {},
@@ -73,7 +74,7 @@ impl DepositInfo {
         } = self
         {
             let paid = must_pay(info, denom)?;
-            if paid != *amount {
+            if paid != Uint256::new(amount.u128()) {
                 Err(DepositError::InvalidDeposit {})
             } else {
                 Ok(())
@@ -105,7 +106,7 @@ impl DepositInfo {
                     msg: to_json_binary(&abstract_cw20::Cw20ExecuteMsg::TransferFrom {
                         owner: depositor.to_string(),
                         recipient: contract.to_string(),
-                        amount: *amount,
+                        amount: Uint256::new(amount.u128()),
                     })?,
                 }
                 .into()]
@@ -121,7 +122,7 @@ impl DepositInfo {
             Denom::Native(denom) => BankMsg::Send {
                 to_address: depositor.to_string(),
                 amount: vec![Coin {
-                    amount: self.amount,
+                    amount: self.amount.into(),
                     denom: denom.to_string(),
                 }],
             }
@@ -130,7 +131,7 @@ impl DepositInfo {
                 contract_addr: address.to_string(),
                 msg: to_json_binary(&abstract_cw20::Cw20ExecuteMsg::Transfer {
                     recipient: depositor.to_string(),
-                    amount: self.amount,
+                    amount: self.amount.into(),
                 })?,
                 funds: vec![],
             }

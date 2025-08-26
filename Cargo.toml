@@ -1,5 +1,6 @@
 [workspace]
 members = ["packages/*", "contracts/*"]
+exclude = ["packages/cw-plus-orch"]
 
 # Resolver has to be set explicitely in workspaces, see https://github.com/rust-lang/cargo/issues/9956
 resolver = "2"
@@ -46,4 +47,5 @@ debug-assertions = false
 
 
 [workspace.dependencies]
-cw-orch = { version = "0.24.0" }
+cw-orch = { version = "0.30.0" , git = "https://github.com/permissionlessweb/cw-orchestrator" }
+easy-addr = {version = "3.0.0" , path = "packages/easy-addr" }

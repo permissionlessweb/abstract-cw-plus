@@ -3,7 +3,7 @@
 use abstract_cw20::{BalanceResponse, MinterResponse};
 use abstract_cw20_base::msg::QueryMsg;
 use abstract_cw3::Vote;
-use cosmwasm_std::{to_json_binary, Addr, Empty, Uint128, WasmMsg};
+use cosmwasm_std::{to_json_binary, Addr, Empty, Uint256, WasmMsg};
 use cw_multi_test::{App, Contract, ContractWrapper, Executor};
 use cw_utils::{Duration, Threshold};
 
@@ -58,6 +58,8 @@ fn cw3_controls_cw20() {
         max_voting_period: Duration::Height(3),
     };
 
+    let res = router.wrap().query_wasm_code_info(cw3_id).unwrap();
+    println!("{:#?}", res);
     let multisig_addr = router
         .instantiate_contract(
             cw3_id,
@@ -96,10 +98,10 @@ fn cw3_controls_cw20() {
 
     // mint some cw20 tokens according to proposal result
     let mint_recipient = Addr::unchecked("recipient");
-    let mint_amount = Uint128::new(1000);
+    let mint_amount = Uint256::new(1000);
     let cw20_mint_msg = abstract_cw20_base::msg::ExecuteMsg::Mint {
         recipient: mint_recipient.to_string(),
-        amount: mint_amount,
+        amount: mint_amount.into(),
     };
 
     let execute_mint_msg = WasmMsg::Execute {

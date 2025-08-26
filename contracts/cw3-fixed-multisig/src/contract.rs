@@ -163,7 +163,7 @@ pub fn execute_vote(
         Some(_) => Err(ContractError::AlreadyVoted {}),
         None => Ok(Ballot {
             weight: vote_power,
-            vote,
+            vote: vote.clone(),
         }),
     })?;
 
@@ -415,11 +415,12 @@ fn list_voters(
 
 #[cfg(test)]
 mod tests {
-    use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
-    use cosmwasm_std::{coin, from_json, BankMsg, Decimal};
+    use cosmwasm_std::testing::{message_info, mock_dependencies, mock_env};
+    use cosmwasm_std::{coin, from_json, Addr, BankMsg, Decimal};
 
     use abstract_cw2::{get_contract_version, ContractVersion};
     use cw_utils::{Duration, Threshold};
+    use easy_addr::addr;
 
     use crate::msg::Voter;
 
@@ -437,15 +438,15 @@ mod tests {
         env
     }
 
-    const OWNER: &str = "admin0001";
-    const VOTER1: &str = "voter0001";
-    const VOTER2: &str = "voter0002";
-    const VOTER3: &str = "voter0003";
-    const VOTER4: &str = "voter0004";
-    const VOTER5: &str = "voter0005";
-    const VOTER6: &str = "voter0006";
-    const NOWEIGHT_VOTER: &str = "voterxxxx";
-    const SOMEBODY: &str = "somebody";
+    const OWNER: &str = addr!("admin0001");
+    const VOTER1: &str = addr!("voter0001");
+    const VOTER2: &str = addr!("voter0002");
+    const VOTER3: &str = addr!("voter0003");
+    const VOTER4: &str = addr!("voter0004");
+    const VOTER5: &str = addr!("voter0005");
+    const VOTER6: &str = addr!("voter0006");
+    const NOWEIGHT_VOTER: &str = addr!("voterxxxx");
+    const SOMEBODY: &str = addr!("somebody");
 
     fn voter<T: Into<String>>(addr: T, weight: u64) -> Voter {
         Voter {
@@ -502,7 +503,7 @@ mod tests {
     #[test]
     fn test_instantiate_works() {
         let mut deps = mock_dependencies();
-        let info = mock_info(OWNER, &[]);
+        let info = message_info(&Addr::unchecked(OWNER), &[]);
 
         let max_voting_period = Duration::Time(1234567);
 
@@ -522,7 +523,7 @@ mod tests {
             instantiate_msg.clone(),
         )
         .unwrap_err();
-        assert_eq!(err, ContractError::NoVoters {});
+        assert_eq!(err.to_string(), ContractError::NoVoters {}.to_string());
 
         // Zero required weight fails
         let instantiate_msg = InstantiateMsg {
@@ -532,8 +533,8 @@ mod tests {
         let err =
             instantiate(deps.as_mut(), mock_env(), info.clone(), instantiate_msg).unwrap_err();
         assert_eq!(
-            err,
-            ContractError::Threshold(cw_utils::ThresholdError::InvalidThreshold {})
+            err.to_string(),
+            ContractError::Threshold(cw_utils::ThresholdError::InvalidThreshold {}).to_string()
         );
 
         // Total weight less than required weight not allowed
@@ -541,8 +542,8 @@ mod tests {
         let err =
             setup_test_case(deps.as_mut(), info.clone(), threshold, max_voting_period).unwrap_err();
         assert_eq!(
-            err,
-            ContractError::Threshold(cw_utils::ThresholdError::UnreachableWeight {})
+            err.to_string(),
+            ContractError::Threshold(cw_utils::ThresholdError::UnreachableWeight {}).to_string()
         );
 
         // All valid
@@ -568,7 +569,7 @@ mod tests {
         let threshold = Threshold::AbsoluteCount { weight: 4 };
         let voting_period = Duration::Time(2000000);
 
-        let info = mock_info(OWNER, &[]);
+        let info = message_info(&Addr::unchecked(OWNER), &[]);
         setup_test_case(deps.as_mut(), info, threshold, voting_period).unwrap();
 
         let bank_msg = BankMsg::Send {
@@ -578,7 +579,7 @@ mod tests {
         let msgs = vec![CosmosMsg::Bank(bank_msg)];
 
         // Voter without voting power still can create proposal
-        let info = mock_info(NOWEIGHT_VOTER, &[]);
+        let info = message_info(&Addr::unchecked(NOWEIGHT_VOTER), &[]);
         let proposal = ExecuteMsg::Propose {
             title: "Rewarding somebody".to_string(),
             description: "Do we reward her?".to_string(),
@@ -596,9 +597,9 @@ mod tests {
             vote: Vote::No,
         };
         // Only voters with weight can vote
-        let info = mock_info(NOWEIGHT_VOTER, &[]);
+        let info = message_info(&Addr::unchecked(NOWEIGHT_VOTER), &[]);
         let err = execute(deps.as_mut(), mock_env(), info, no_vote).unwrap_err();
-        assert_eq!(err, ContractError::Unauthorized {});
+        assert_eq!(err.to_string(), ContractError::Unauthorized {}.to_string());
     }
 
     #[test]
@@ -608,7 +609,7 @@ mod tests {
         let threshold = Threshold::AbsoluteCount { weight: 4 };
         let voting_period = Duration::Time(2000000);
 
-        let info = mock_info(OWNER, &[]);
+        let info = message_info(&Addr::unchecked(OWNER), &[]);
         setup_test_case(deps.as_mut(), info, threshold, voting_period).unwrap();
 
         let bank_msg = BankMsg::Send {
@@ -618,7 +619,7 @@ mod tests {
         let msgs = vec![CosmosMsg::Bank(bank_msg)];
 
         // Only voters can propose
-        let info = mock_info(SOMEBODY, &[]);
+        let info = message_info(&Addr::unchecked(SOMEBODY), &[]);
         let proposal = ExecuteMsg::Propose {
             title: "Rewarding somebody".to_string(),
             description: "Do we reward her?".to_string(),
@@ -626,10 +627,10 @@ mod tests {
             latest: None,
         };
         let err = execute(deps.as_mut(), mock_env(), info, proposal.clone()).unwrap_err();
-        assert_eq!(err, ContractError::Unauthorized {});
+        assert_eq!(err.to_string(), ContractError::Unauthorized {}.to_string());
 
         // Wrong expiration option fails
-        let info = mock_info(OWNER, &[]);
+        let info = message_info(&Addr::unchecked(OWNER), &[]);
         let proposal_wrong_exp = ExecuteMsg::Propose {
             title: "Rewarding somebody".to_string(),
             description: "Do we reward her?".to_string(),
@@ -637,10 +638,10 @@ mod tests {
             latest: Some(Expiration::AtHeight(123456)),
         };
         let err = execute(deps.as_mut(), mock_env(), info, proposal_wrong_exp).unwrap_err();
-        assert_eq!(err, ContractError::WrongExpiration {});
+        assert_eq!(err.to_string(), ContractError::WrongExpiration {}.to_string());
 
         // Proposal from voter works
-        let info = mock_info(VOTER3, &[]);
+        let info = message_info(&Addr::unchecked(VOTER3), &[]);
         let res = execute(deps.as_mut(), mock_env(), info, proposal.clone()).unwrap();
 
         // Verify
@@ -654,7 +655,7 @@ mod tests {
         );
 
         // Proposal from voter with enough vote power directly passes
-        let info = mock_info(VOTER4, &[]);
+        let info = message_info(&Addr::unchecked(VOTER4), &[]);
         let res = execute(deps.as_mut(), mock_env(), info, proposal).unwrap();
 
         // Verify
@@ -675,7 +676,7 @@ mod tests {
         let threshold = Threshold::AbsoluteCount { weight: 3 };
         let voting_period = Duration::Time(2000000);
 
-        let info = mock_info(OWNER, &[]);
+        let info = message_info(&Addr::unchecked(OWNER), &[]);
         setup_test_case(deps.as_mut(), info.clone(), threshold, voting_period).unwrap();
 
         // Propose
@@ -701,15 +702,15 @@ mod tests {
             vote: Vote::Yes,
         };
         let err = execute(deps.as_mut(), mock_env(), info, yes_vote.clone()).unwrap_err();
-        assert_eq!(err, ContractError::AlreadyVoted {});
+        assert_eq!(err.to_string(), ContractError::AlreadyVoted {}.to_string());
 
         // Only voters can vote
-        let info = mock_info(SOMEBODY, &[]);
+        let info = message_info(&Addr::unchecked(SOMEBODY), &[]);
         let err = execute(deps.as_mut(), mock_env(), info, yes_vote.clone()).unwrap_err();
-        assert_eq!(err, ContractError::Unauthorized {});
+        assert_eq!(err.to_string(), ContractError::Unauthorized {}.to_string());
 
         // But voter1 can
-        let info = mock_info(VOTER1, &[]);
+        let info = message_info(&Addr::unchecked(VOTER1), &[]);
         let res = execute(deps.as_mut(), mock_env(), info, yes_vote.clone()).unwrap();
 
         // Verify
@@ -734,7 +735,7 @@ mod tests {
             proposal_id,
             vote: Vote::No,
         };
-        let info = mock_info(VOTER2, &[]);
+        let info = message_info(&Addr::unchecked(VOTER2), &[]);
         execute(deps.as_mut(), mock_env(), info, no_vote.clone()).unwrap();
 
         // Cast a Veto vote
@@ -742,7 +743,7 @@ mod tests {
             proposal_id,
             vote: Vote::Veto,
         };
-        let info = mock_info(VOTER3, &[]);
+        let info = message_info(&Addr::unchecked(VOTER3), &[]);
         execute(deps.as_mut(), mock_env(), info.clone(), veto_vote).unwrap();
 
         // Verify
@@ -750,7 +751,7 @@ mod tests {
 
         // Once voted, votes cannot be changed
         let err = execute(deps.as_mut(), mock_env(), info.clone(), yes_vote.clone()).unwrap_err();
-        assert_eq!(err, ContractError::AlreadyVoted {});
+        assert_eq!(err.to_string(), ContractError::AlreadyVoted {}.to_string());
         assert_eq!(tally, get_tally(deps.as_ref(), proposal_id));
 
         // Expired proposals cannot be voted
@@ -759,10 +760,10 @@ mod tests {
             Duration::Height(duration) => mock_env_height(duration + 1),
         };
         let err = execute(deps.as_mut(), env, info, no_vote).unwrap_err();
-        assert_eq!(err, ContractError::Expired {});
+        assert_eq!(err.to_string(), ContractError::Expired {}.to_string());
 
         // Vote it again, so it passes
-        let info = mock_info(VOTER4, &[]);
+        let info = message_info(&Addr::unchecked(VOTER4), &[]);
         let res = execute(deps.as_mut(), mock_env(), info, yes_vote.clone()).unwrap();
 
         // Verify
@@ -776,7 +777,7 @@ mod tests {
         );
 
         // Passed proposals can still be voted (while they are not expired or executed)
-        let info = mock_info(VOTER5, &[]);
+        let info = message_info(&Addr::unchecked(VOTER5), &[]);
         let res = execute(deps.as_mut(), mock_env(), info, yes_vote).unwrap();
 
         // Verify
@@ -790,7 +791,7 @@ mod tests {
         );
 
         // Propose
-        let info = mock_info(OWNER, &[]);
+        let info = message_info(&Addr::unchecked(OWNER), &[]);
         let bank_msg = BankMsg::Send {
             to_address: SOMEBODY.into(),
             amount: vec![coin(1, "BTC")],
@@ -813,7 +814,7 @@ mod tests {
             vote: Vote::No,
         };
         // Voter1 vote no, weight 1
-        let info = mock_info(VOTER1, &[]);
+        let info = message_info(&Addr::unchecked(VOTER1), &[]);
         let res = execute(deps.as_mut(), mock_env(), info, no_vote.clone()).unwrap();
 
         // Verify it is not enough to reject yet
@@ -827,7 +828,7 @@ mod tests {
         );
 
         // Voter 4 votes no, weight 4, total weight for no so far 5, need 14 to reject
-        let info = mock_info(VOTER4, &[]);
+        let info = message_info(&Addr::unchecked(VOTER4), &[]);
         let res = execute(deps.as_mut(), mock_env(), info, no_vote.clone()).unwrap();
 
         // Verify it is still open as we actually need no votes > 17 - 3
@@ -841,11 +842,11 @@ mod tests {
         );
 
         // Voter 3 votes no, weight 3, total weight for no far 8, need 14
-        let info = mock_info(VOTER3, &[]);
+        let info = message_info(&Addr::unchecked(VOTER3), &[]);
         let _res = execute(deps.as_mut(), mock_env(), info, no_vote.clone()).unwrap();
 
         // Voter 5 votes no, weight 5, total weight for no far 13, need 14
-        let info = mock_info(VOTER5, &[]);
+        let info = message_info(&Addr::unchecked(VOTER5), &[]);
         let res = execute(deps.as_mut(), mock_env(), info, no_vote.clone()).unwrap();
 
         // Verify it is still open as we actually need no votes > 17 - 3
@@ -860,7 +861,7 @@ mod tests {
 
         // Voter 2 votes no, weight 2, total weight for no so far 15, need 14.
         // Can now reject
-        let info = mock_info(VOTER2, &[]);
+        let info = message_info(&Addr::unchecked(VOTER2), &[]);
         let res = execute(deps.as_mut(), mock_env(), info, no_vote).unwrap();
 
         // Verify it is rejected as, 15 no votes > 17 - 3
@@ -874,7 +875,7 @@ mod tests {
         );
 
         // Rejected proposals can still be voted (while they are not expired)
-        let info = mock_info(VOTER6, &[]);
+        let info = message_info(&Addr::unchecked(VOTER6), &[]);
         let yes_vote = ExecuteMsg::Vote {
             proposal_id,
             vote: Vote::Yes,
@@ -899,7 +900,7 @@ mod tests {
         let threshold = Threshold::AbsoluteCount { weight: 3 };
         let voting_period = Duration::Time(2000000);
 
-        let info = mock_info(OWNER, &[]);
+        let info = message_info(&Addr::unchecked(OWNER), &[]);
         setup_test_case(deps.as_mut(), info.clone(), threshold, voting_period).unwrap();
 
         // Propose
@@ -922,14 +923,14 @@ mod tests {
         // Only Passed can be executed
         let execution = ExecuteMsg::Execute { proposal_id };
         let err = execute(deps.as_mut(), mock_env(), info, execution.clone()).unwrap_err();
-        assert_eq!(err, ContractError::WrongExecuteStatus {});
+        assert_eq!(err.to_string(), ContractError::WrongExecuteStatus {}.to_string());
 
         // Vote it, so it passes
         let vote = ExecuteMsg::Vote {
             proposal_id,
             vote: Vote::Yes,
         };
-        let info = mock_info(VOTER3, &[]);
+        let info = message_info(&Addr::unchecked(VOTER3), &[]);
         let res = execute(deps.as_mut(), mock_env(), info.clone(), vote).unwrap();
 
         // Verify
@@ -945,10 +946,10 @@ mod tests {
         // In passing: Try to close Passed fails
         let closing = ExecuteMsg::Close { proposal_id };
         let err = execute(deps.as_mut(), mock_env(), info, closing).unwrap_err();
-        assert_eq!(err, ContractError::WrongCloseStatus {});
+        assert_eq!(err.to_string(), ContractError::WrongCloseStatus {}.to_string());
 
         // Execute works. Anybody can execute Passed proposals
-        let info = mock_info(SOMEBODY, &[]);
+        let info = message_info(&Addr::unchecked(SOMEBODY), &[]);
         let res = execute(deps.as_mut(), mock_env(), info.clone(), execution).unwrap();
 
         // Verify
@@ -964,7 +965,7 @@ mod tests {
         // In passing: Try to close Executed fails
         let closing = ExecuteMsg::Close { proposal_id };
         let err = execute(deps.as_mut(), mock_env(), info, closing).unwrap_err();
-        assert_eq!(err, ContractError::WrongCloseStatus {});
+        assert_eq!(err.to_string(), ContractError::WrongCloseStatus {}.to_string());
     }
 
     #[test]
@@ -977,7 +978,7 @@ mod tests {
         };
         let voting_period = Duration::Time(2000000);
 
-        let info = mock_info(OWNER, &[]);
+        let info = message_info(&Addr::unchecked(OWNER), &[]);
         setup_test_case(deps.as_mut(), info.clone(), threshold, voting_period).unwrap();
 
         // Propose
@@ -1002,7 +1003,7 @@ mod tests {
             proposal_id,
             vote: Vote::Yes,
         };
-        let info = mock_info(VOTER3, &[]);
+        let info = message_info(&Addr::unchecked(VOTER3), &[]);
         let res = execute(deps.as_mut(), mock_env(), info, vote).unwrap();
         assert_eq!(
             res,
@@ -1032,7 +1033,7 @@ mod tests {
         assert_eq!(prop.status, Status::Passed);
 
         // Closing should NOT be possible
-        let info = mock_info(SOMEBODY, &[]);
+        let info = message_info(&Addr::unchecked(SOMEBODY), &[]);
         let err = execute(
             deps.as_mut(),
             env.clone(),
@@ -1040,7 +1041,7 @@ mod tests {
             ExecuteMsg::Close { proposal_id },
         )
         .unwrap_err();
-        assert_eq!(err, ContractError::WrongCloseStatus {});
+        assert_eq!(err.to_string(), ContractError::WrongCloseStatus {}.to_string());
 
         // Execution should now be possible
         let res = execute(
@@ -1067,7 +1068,7 @@ mod tests {
         let threshold = Threshold::AbsoluteCount { weight: 3 };
         let voting_period = Duration::Height(2000000);
 
-        let info = mock_info(OWNER, &[]);
+        let info = message_info(&Addr::unchecked(OWNER), &[]);
         setup_test_case(deps.as_mut(), info.clone(), threshold, voting_period).unwrap();
 
         // Propose
@@ -1090,14 +1091,14 @@ mod tests {
         let closing = ExecuteMsg::Close { proposal_id };
 
         // Anybody can close
-        let info = mock_info(SOMEBODY, &[]);
+        let info = message_info(&Addr::unchecked(SOMEBODY), &[]);
 
         // Non-expired proposals cannot be closed
         let err = execute(deps.as_mut(), mock_env(), info, closing).unwrap_err();
-        assert_eq!(err, ContractError::NotExpired {});
+        assert_eq!(err.to_string(), ContractError::NotExpired {}.to_string());
 
         // Expired proposals can be closed
-        let info = mock_info(OWNER, &[]);
+        let info = message_info(&Addr::unchecked(OWNER), &[]);
 
         let proposal = ExecuteMsg::Propose {
             title: "(Try to) pay somebody".to_string(),
@@ -1117,7 +1118,7 @@ mod tests {
         let res = execute(
             deps.as_mut(),
             env,
-            mock_info(SOMEBODY, &[]),
+            message_info(&Addr::unchecked(SOMEBODY), &[]),
             closing.clone(),
         )
         .unwrap();
@@ -1133,6 +1134,9 @@ mod tests {
 
         // Trying to close it again fails
         let err = execute(deps.as_mut(), mock_env(), info, closing).unwrap_err();
-        assert_eq!(err, ContractError::WrongCloseStatus {});
+        assert_eq!(
+            err.to_string(),
+            ContractError::WrongCloseStatus {}.to_string()
+        );
     }
 }

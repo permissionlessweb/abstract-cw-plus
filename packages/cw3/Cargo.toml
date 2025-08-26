@@ -9,10 +9,10 @@ repository = "https://github.com/CosmWasm/cw-plus"
 homepage = "https://cosmwasm.com"
 
 [dependencies]
-cw-utils = "1.0.1"
-abstract-cw20 = { version = "3.0.0", path = "../../packages/cw20" }
-cosmwasm-schema = "1.4.0"
-cosmwasm-std = "1.4.0"
-schemars = "0.8.15"
-serde = { version = "1.0.188", default-features = false, features = ["derive"] }
-thiserror = { version = "1.0.49" }
+cw-utils         = { version = "3.0.0" }
+abstract-cw20    = { version = "3.0.0", path = "../../packages/cw20" }
+cosmwasm-schema  = { version = "3.0.0" }
+cosmwasm-std     = { version = "3.0.0" }
+schemars         = { version = "0.8.4" }
+serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
+thiserror        = { version = "1.0.69" }

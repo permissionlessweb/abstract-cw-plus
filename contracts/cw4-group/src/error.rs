@@ -3,7 +3,7 @@ use thiserror::Error;
 
 use cw_controllers::{AdminError, HookError};
 
-#[derive(Error, Debug, PartialEq)]
+#[derive(Error, Debug)]
 pub enum ContractError {
     #[error("{0}")]
     Std(#[from] StdError),

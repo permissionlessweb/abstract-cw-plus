@@ -259,7 +259,7 @@ mod cw4_stake {
 }
 
 mod cw20_base {
-    use cosmwasm_std::Uint128;
+    use cosmwasm_std::Uint256;
     use cw20::MinterResponse;
     use cw_orch::{mock::Mock, prelude::*};
     use cw_plus_orch::cw20_base::{
@@ -301,7 +301,7 @@ mod cw20_base {
 
         // Check new balance of user1
         let balance = cw20.balance(user1.to_string()).unwrap().balance;
-        assert_eq!(balance, Uint128::new(90));
+        assert_eq!(balance, Uint256::new(90));
 
         // Check that user2 registered
         let accounts = cw20.all_accounts(None, None).unwrap().accounts;
@@ -313,7 +313,7 @@ mod cw20_base {
 }
 
 mod cw20_ics {
-    use cosmwasm_std::{coins, to_json_binary, Uint128};
+    use cosmwasm_std::{coins, to_json_binary, Uint256};
     use cw20::MinterResponse;
     use cw20_base::msg::InstantiateMsg;
     use cw20_ics20::{
@@ -321,7 +321,7 @@ mod cw20_ics {
         msg::AllowedInfo,
     };
     use cw_orch::prelude::*;
-    use cw_orch_interchain::{env::contract_port, prelude::*};
+    use cw_orch_interchain::{core::env::contract_port, prelude::*};
     use cw_plus_orch::{
         cw20_base::{Cw20Base, ExecuteMsgInterfaceFns as _},
         cw20_ics20::{
@@ -348,7 +348,7 @@ mod cw20_ics {
                 decimals: 12,
                 initial_balances: vec![],
                 mint: Some(MinterResponse {
-                    minter: juno.sender_addr().to_string(),
+                    minter: juno.sender.to_string(),
                     cap: None,
                 }),
                 marketing: None,
@@ -414,11 +414,7 @@ mod cw20_ics {
         cw20.mint(100_u128, user_juno.to_string()).unwrap();
         let response = cw20
             .call_as(&user_juno)
-            .send(
-                100_u128,
-                cw20_ics20.addr_str().unwrap(),
-                to_json_binary(&transfer_msg).unwrap(),
-            )
+            .send(100_u128, cw20_ics20.addr_str().unwrap(), to_json_binary(&transfer_msg).unwrap())
             .unwrap();
         interchain
             .await_and_check_packets("juno-1", response)
@@ -434,7 +430,7 @@ mod cw20_ics {
             .unwrap();
 
         let balance = stargaze.balance(&user_stargaze, None).unwrap();
-        assert_eq!(balance[0].amount, Uint128::new(100));
-        assert_eq!(balance[1].amount, Uint128::new(200));
+        assert_eq!(balance[0].amount, Uint256::new(100));
+        assert_eq!(balance[1].amount, Uint256::new(200));
     }
 }
