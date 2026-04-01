@@ -41,8 +41,8 @@ cw20                          = { version = "3.0.0", git = "https://github.com/p
 cw20-base                     = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
 cw20-ics20                    = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
 
-cw-orch                       = { version = "0.30.0", git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-orch                       = { version = "0.30.0", path = "../../../cw-orchestrator/cw-orch" }
 cw-orch-from-interface-derive = { version = "0.1.0", path = "../from-interface-derive" }
 
 [dev-dependencies]
-cw-orch-interchain            = { version = "0.8.1", git = "https://github.com/permissionlessweb/cw-orchestrator" }
+cw-orch-interchain            = { version = "0.8.0", path = "../../../cw-orchestrator/cw-orch-interchain" }
