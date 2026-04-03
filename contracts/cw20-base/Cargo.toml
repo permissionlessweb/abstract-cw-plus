@@ -18,8 +18,8 @@ library = []
 
 [dependencies]
 cosmwasm-schema  = { version = "3.0.0" }
-cw-utils         = { version = "3.0.0" }
-cw2              = { version = "3.0.0" }
+cw-utils         = { path = "../../../cw-minus/packages/cw-utils" }
+cw2              = { path = "../../../cw-minus/packages/cw2" }
 abstract-cw2     = { version = "1.2.2", path = "../../packages/cw2" }
 abstract-cw20    = { version = "3.0.0", path = "../../packages/cw20" }
 cw-storage-plus  = { version = "3.0.0" }

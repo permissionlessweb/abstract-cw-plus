@@ -27,10 +27,10 @@ library = []
 
 [dependencies]
 cosmwasm-schema  = { version = "3.0.0" }
-cw-utils         = { version = "3.0.0" }
+cw-utils         = { path = "../../../cw-minus/packages/cw-utils" }
 abstract-cw2     = { version = "1.2.2", path = "../../packages/cw2" }
 abstract-cw4     = { version = "1.2.2", path = "../../packages/cw4" }
-cw-controllers   = { version = "1.1.2", path = "../../packages/controllers" }
+cw-controllers   = { path = "../../../cw-minus/packages/controllers" }
 cw-storage-plus  = { version = "3.0.0" }
 cosmwasm-std     = { version = "3.0.0" }
 schemars         = { version = "0.8.22" }

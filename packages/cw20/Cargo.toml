@@ -11,7 +11,7 @@ homepage = "https://cosmwasm.com"
 [features]
 
 [dependencies]
-cw-utils         = { version = "3.0.0" }
+cw-utils         = { path = "../../../cw-minus/packages/cw-utils" }
 cosmwasm-schema  = { version = "3.0.0" }
 cosmwasm-std     = { version = "3.0.0" }
 schemars         = { version = "0.8.22" }

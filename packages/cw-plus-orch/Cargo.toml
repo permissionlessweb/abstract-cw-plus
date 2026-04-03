@@ -24,22 +24,22 @@ library = [
 
 [dependencies]
 cosmwasm-std                  = { version = "3.0.0" }
-cw-utils                      = { version = "3.0.0" }
+cw-utils                      = { path = "../../../cw-minus/packages/cw-utils" }
 cosmwasm-schema               = { version = "3.0.0" }
-cw-controllers                = { version = "3.0.0" }
+cw-controllers                = { path = "../../../cw-minus/packages/controllers" }
 
-cw1                           = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
+cw1                           = { path = "../../../cw-plus/packages/cw1" }
 cw1-subkeys                   = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw1-whitelist                 = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw3                           = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
+cw1-whitelist                 = { path = "../../../cw-plus/contracts/cw1-whitelist" }
+cw3                           = { path = "../../../cw-plus/packages/cw3" }
 cw3-fixed-multisig            = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
 cw3-flex-multisig             = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw4                           = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw4-group                     = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
+cw4                           = { path = "../../../cw-plus/packages/cw4" }
+cw4-group                     = { path = "../../../cw-plus/contracts/cw4-group" }
 cw4-stake                     = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw20                          = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw20-base                     = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
-cw20-ics20                    = { version = "3.0.0", git = "https://github.com/permissionlessweb/cw-plus" }
+cw20                          = { path = "../../../cw-plus/packages/cw20" }
+cw20-base                     = { path = "../../../cw-plus/contracts/cw20-base" }
+cw20-ics20                    = { path = "../../../cw-plus/contracts/cw20-ics20" }
 
 cw-orch                       = { version = "0.30.0", path = "../../../cw-orchestrator/cw-orch" }
 cw-orch-from-interface-derive = { version = "0.1.0", path = "../from-interface-derive" }

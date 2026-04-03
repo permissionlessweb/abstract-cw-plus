@@ -19,7 +19,7 @@ test-utils = []
 
 [dependencies]
 cosmwasm-schema  = { version = "3.0.0" }
-cw-utils         = { version = "3.0.0" }
+cw-utils         = { path = "../../../cw-minus/packages/cw-utils" }
 abstract-cw1     = { version = "1.2.2", path = "../../packages/cw1" }
 abstract-cw2     = { version = "1.2.2", path = "../../packages/cw2" }
 cosmwasm-std     = { version = "3.0.0", features = ["staking"] }

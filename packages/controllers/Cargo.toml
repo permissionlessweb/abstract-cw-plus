@@ -13,7 +13,7 @@ homepage = "https://cosmwasm.com"
 [dependencies]
 cosmwasm-schema  = { version = "3.0.0" }
 cosmwasm-std     = { version = "3.0.0" }
-cw-utils         = { version = "3.0.0" }
+cw-utils         = { path = "../../../cw-minus/packages/cw-utils" }
 cw-storage-plus  = { version = "3.0.0" }
 schemars         = { version = "0.8.22" }
 serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
