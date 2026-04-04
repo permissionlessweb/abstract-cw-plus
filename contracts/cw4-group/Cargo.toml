@@ -26,13 +26,13 @@ crate-type = ["cdylib", "rlib"]
 library = []
 
 [dependencies]
-cosmwasm-schema  = { version = "3.0.0" }
+cosmwasm-schema  = { version = "3.0.4" }
 cw-utils         = { path = "../../../cw-minus/packages/cw-utils" }
 abstract-cw2     = { version = "1.2.2", path = "../../packages/cw2" }
 abstract-cw4     = { version = "1.2.2", path = "../../packages/cw4" }
 cw-controllers   = { path = "../../../cw-minus/packages/controllers" }
-cw-storage-plus  = { version = "3.0.0" }
-cosmwasm-std     = { version = "3.0.0" }
+cw-storage-plus  = { version = "3.0.1" }
+cosmwasm-std     = { version = "3.0.4" }
 schemars         = { version = "0.8.22" }
 serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
 thiserror        = { version = "1.0.69" }

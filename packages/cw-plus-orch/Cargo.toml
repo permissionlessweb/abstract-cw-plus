@@ -23,9 +23,9 @@ library = [
 ]
 
 [dependencies]
-cosmwasm-std                  = { version = "3.0.0" }
+cosmwasm-std                  = { version = "3.0.4" }
 cw-utils                      = { path = "../../../cw-minus/packages/cw-utils" }
-cosmwasm-schema               = { version = "3.0.0" }
+cosmwasm-schema               = { version = "3.0.4" }
 cw-controllers                = { path = "../../../cw-minus/packages/controllers" }
 
 cw1                           = { path = "../../../cw-plus/packages/cw1" }

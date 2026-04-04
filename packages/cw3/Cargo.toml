@@ -11,8 +11,8 @@ homepage = "https://cosmwasm.com"
 [dependencies]
 cw-utils         = { path = "../../../cw-minus/packages/cw-utils" }
 abstract-cw20    = { version = "3.0.0", path = "../../packages/cw20" }
-cosmwasm-schema  = { version = "3.0.0" }
-cosmwasm-std     = { version = "3.0.0" }
+cosmwasm-schema  = { version = "3.0.4" }
+cosmwasm-std     = { version = "3.0.4" }
 schemars         = { version = "0.8.22" }
 serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
 thiserror        = { version = "1.0.69" }

@@ -12,11 +12,11 @@ homepage = "https://cosmwasm.com"
 
 [dependencies]
 cw-utils         = { path = "../../../cw-minus/packages/cw-utils" }
-cosmwasm-schema  = { version = "3.0.0" }
-cosmwasm-std     = { version = "3.0.0" }
+cosmwasm-schema  = { version = "3.0.4" }
+cosmwasm-std     = { version = "3.0.4" }
 schemars         = { version = "0.8.22" }
 serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
 cw-orch          = { workspace = true }
 
 [dev-dependencies]
-cosmwasm-schema  = { version = "3.0.0" }
+cosmwasm-schema  = { version = "3.0.4" }
