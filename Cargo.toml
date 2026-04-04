@@ -47,5 +47,5 @@ debug-assertions = false
 
 
 [workspace.dependencies]
-cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "main" }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "cw3" }
 easy-addr = {version = "3.0.0" , path = "packages/easy-addr" }
