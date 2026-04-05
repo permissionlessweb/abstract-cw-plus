@@ -5,12 +5,13 @@ version = 4
 [[package]]
 name = "abstract-cw-multi-test"
 version = "3.0.0-rc"
+source = "git+https://github.com/permissionlessweb/cw-multi-test-fork?branch=bump%2Fcw3%2Fofficial-ibc-fork#b8f72f4f89cc46a2aff09d785e1f7a0e781fce45"
 dependencies = [
  "bech32",
  "cosmwasm-schema",
  "cosmwasm-std",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "cw20-ics20",
  "hex",
  "itertools 0.14.0",
@@ -45,7 +46,7 @@ dependencies = [
  "cosmwasm-std",
  "cw-orch",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "easy-addr",
  "schemars 0.8.22",
  "semver",
@@ -66,7 +67,7 @@ dependencies = [
  "cw-multi-test",
  "cw-orch",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "derivative",
  "easy-addr",
  "schemars 0.8.22",
@@ -93,7 +94,7 @@ dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
  "cw-orch",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "schemars 0.8.22",
  "serde",
 ]
@@ -109,7 +110,7 @@ dependencies = [
  "cw-multi-test",
  "cw-orch",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "cw2",
  "easy-addr",
  "schemars 0.8.22",
@@ -129,7 +130,7 @@ dependencies = [
  "cw-controllers 3.0.0",
  "cw-orch",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "easy-addr",
  "schemars 0.8.22",
  "semver",
@@ -144,7 +145,7 @@ dependencies = [
  "abstract-cw20",
  "cosmwasm-schema",
  "cosmwasm-std",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "schemars 0.8.22",
  "serde",
  "thiserror 1.0.69",
@@ -163,7 +164,7 @@ dependencies = [
  "cw-multi-test",
  "cw-orch",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "easy-addr",
  "schemars 0.8.22",
  "serde",
@@ -186,7 +187,7 @@ dependencies = [
  "cw-multi-test",
  "cw-orch",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "schemars 0.8.22",
  "serde",
  "thiserror 1.0.69",
@@ -214,7 +215,7 @@ dependencies = [
  "cw-controllers 3.0.0",
  "cw-orch",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "easy-addr",
  "schemars 0.8.22",
  "serde",
@@ -233,7 +234,7 @@ dependencies = [
  "cw-controllers 3.0.0",
  "cw-orch",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "easy-addr",
  "schemars 0.8.22",
  "serde",
@@ -494,6 +495,7 @@ dependencies = [
 [[package]]
 name = "cosmos-sdk-proto"
 version = "0.28.0"
+source = "git+https://github.com/permissionlessweb/cosmos-rust?branch=main#2017200e4180dec8ed19fdc0cd633279d6b3c6f9"
 dependencies = [
  "bytes",
  "http-body-util",
@@ -505,15 +507,13 @@ dependencies = [
 
 [[package]]
 name = "cosmwasm-core"
-version = "3.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "43012d47a8c81ee8824c6f1ca82a2816ee0cb1c15755e535c5d6c43aca8b33ad"
+version = "3.0.3-dev"
+source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 
 [[package]]
 name = "cosmwasm-crypto"
-version = "3.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c31227cd79441952d2862127f91e616f681cefca9a096f5e16556ffb4cc27bd6"
+version = "3.0.3-dev"
+source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "ark-bls12-381",
  "ark-ec",
@@ -536,9 +536,8 @@ dependencies = [
 
 [[package]]
 name = "cosmwasm-derive"
-version = "3.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e3ab5d805c0bbc1bb5c4377612e9c6585b31992905ebddbdc4c31e654f5497e1"
+version = "3.0.3-dev"
+source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -547,9 +546,8 @@ dependencies = [
 
 [[package]]
 name = "cosmwasm-schema"
-version = "3.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3c656f492d3b1b6adc9d6fd5894dd381a060da50ec4a0fd0363db413fba5a573"
+version = "3.0.3-dev"
+source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "cosmwasm-schema-derive",
  "cw-schema",
@@ -561,9 +559,8 @@ dependencies = [
 
 [[package]]
 name = "cosmwasm-schema-derive"
-version = "3.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d8454339d110cf03c3423326b5680539eab57600c34322fd1256d87cf5082b8"
+version = "3.0.3-dev"
+source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -572,9 +569,8 @@ dependencies = [
 
 [[package]]
 name = "cosmwasm-std"
-version = "3.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a94f3409ebf742fefaa6cc49a59de796331e101ab60160bcf4a73a41f5b75f53"
+version = "3.0.3-dev"
+source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "base64",
  "bech32",
@@ -691,7 +687,7 @@ dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "easy-addr",
  "schemars 0.8.22",
  "serde",
@@ -701,11 +697,12 @@ dependencies = [
 [[package]]
 name = "cw-controllers"
 version = "3.0.0"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#47c2b4c18f6d9b7e1b607dc21ee29d7756dc6f06"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "schemars 0.8.22",
  "serde",
  "thiserror 2.0.18",
@@ -714,14 +711,13 @@ dependencies = [
 [[package]]
 name = "cw-multi-test"
 version = "3.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cf9875e88f5b67dbaf729da99a7de4acd593d18d6d8ee83c8006e09dd865745e"
+source = "git+https://github.com/permissionlessweb/cw-multi-test?branch=mvp#820892f44fa5beb43eb66be7a5441c18bc43c02d"
 dependencies = [
  "bech32",
  "cosmwasm-schema",
  "cosmwasm-std",
  "cw-storage-plus",
- "cw-utils 3.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=mvp)",
  "itertools 0.14.0",
  "prost",
  "schemars 0.8.22",
@@ -732,6 +728,7 @@ dependencies = [
 [[package]]
 name = "cw-orch"
 version = "0.30.0"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
 dependencies = [
  "anyhow",
  "cosmwasm-std",
@@ -740,7 +737,7 @@ dependencies = [
  "cw-orch-fns-derive",
  "cw-orch-mock",
  "cw-orch-traits",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "hex",
  "log",
  "schemars 0.8.22",
@@ -751,6 +748,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-contract-derive"
 version = "0.21.1"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
 dependencies = [
  "convert_case",
  "quote",
@@ -760,13 +758,14 @@ dependencies = [
 [[package]]
 name = "cw-orch-core"
 version = "2.1.4"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
 dependencies = [
  "abstract-cw-multi-test",
  "anyhow",
  "cosmos-sdk-proto",
  "cosmwasm-std",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "dirs",
  "log",
  "serde",
@@ -778,6 +777,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-fns-derive"
 version = "0.23.1"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
 dependencies = [
  "convert_case",
  "proc-macro2",
@@ -797,12 +797,13 @@ dependencies = [
 [[package]]
 name = "cw-orch-mock"
 version = "0.24.4"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
 dependencies = [
  "abstract-cw-multi-test",
  "cosmos-sdk-proto",
  "cosmwasm-std",
  "cw-orch-core",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "log",
  "serde",
  "sha2",
@@ -811,6 +812,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-traits"
 version = "0.25.0"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
 dependencies = [
  "cw-orch-core",
  "prost-types",
@@ -818,9 +820,8 @@ dependencies = [
 
 [[package]]
 name = "cw-schema"
-version = "3.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1afc2f9e2990ed379a302f58c3947275379260a22ead60e6af9e51e0ea1892fa"
+version = "3.0.3-dev"
+source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "cw-schema-derive",
  "indexmap",
@@ -833,9 +834,8 @@ dependencies = [
 
 [[package]]
 name = "cw-schema-derive"
-version = "3.0.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5e230a4f41e14e753e41d3521b588a2011f0b8712f846ef432e07f8abcdd2ddc"
+version = "3.0.3-dev"
+source = "git+https://github.com/permissionlessweb/cosmwasm?branch=mvp#d5586deb95247416a6eaf312c8aa3e283e1d15ca"
 dependencies = [
  "heck",
  "itertools 0.13.0",
@@ -848,8 +848,7 @@ dependencies = [
 [[package]]
 name = "cw-storage-plus"
 version = "3.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "75d840d773b4ffd60ff005375e5e15e4be4fda54620574e861bfbb61a074f353"
+source = "git+https://github.com/permissionlessweb/cw-storage-plus?branch=mvp#9cc69e11726116f5d709fde94e05100a0e592fa7"
 dependencies = [
  "cosmwasm-std",
  "schemars 0.8.22",
@@ -859,6 +858,7 @@ dependencies = [
 [[package]]
 name = "cw-utils"
 version = "3.0.0"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#47c2b4c18f6d9b7e1b607dc21ee29d7756dc6f06"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -870,8 +870,7 @@ dependencies = [
 [[package]]
 name = "cw-utils"
 version = "3.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8667e96f2c65cf7f4c6c66bfd6ee46909c40827bc1caea0409234e34f03cf061"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=mvp#afd7e90a4d4ede7b4c00f382b6790cb33e4f2c75"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -883,6 +882,7 @@ dependencies = [
 [[package]]
 name = "cw2"
 version = "3.0.0"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#47c2b4c18f6d9b7e1b607dc21ee29d7756dc6f06"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -896,10 +896,11 @@ dependencies = [
 [[package]]
 name = "cw20"
 version = "3.0.0"
+source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "schemars 0.8.22",
  "serde",
 ]
@@ -907,12 +908,13 @@ dependencies = [
 [[package]]
 name = "cw20-ics20"
 version = "3.0.0"
+source = "git+https://github.com/permissionlessweb/cw-plus?branch=main#27c27971a07ee5482c01afa1de3a4e03206e963f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
  "cw-controllers 3.0.0",
  "cw-storage-plus",
- "cw-utils 3.0.0",
+ "cw-utils 3.0.0 (git+https://github.com/permissionlessweb/cw-minus?branch=main)",
  "cw2",
  "cw20",
  "schemars 0.8.22",
@@ -1438,9 +1440,9 @@ checksum = "b9e0384b61958566e926dc50660321d12159025e767c18e043daf26b70104c39"
 
 [[package]]
 name = "indexmap"
-version = "2.13.0"
+version = "2.13.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7714e70437a7dc3ac8eb7e6f8df75fd8eb422675fc7678aff7364301092b1017"
+checksum = "45a8a2b9cb3e0b0c1803dbb0758ffac5de2f425b23c28f518faabd9d805342ff"
 dependencies = [
  "equivalent",
  "hashbrown 0.16.1",
@@ -1899,9 +1901,9 @@ dependencies = [
 
 [[package]]
 name = "semver"
-version = "1.0.27"
+version = "1.0.28"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d767eb0aabc880b29956c35734170f26ed551a859dbd361d140cdbeca61ab1e2"
+checksum = "8a7852d02fc848982e0c167ef163aaff9cd91dc640ba85e263cb1ce46fae51cd"
 
 [[package]]
 name = "serde"
@@ -2115,6 +2117,7 @@ checksum = "0bf256ce5efdfa370213c1dabab5935a12e49f2c58d15e9eac2870d3b4f27263"
 [[package]]
 name = "tendermint-proto"
 version = "0.40.4"
+source = "git+https://github.com/permissionlessweb/tendermint-rs?branch=main#84af40465b4b393d66f0761d90b2863ff0f7191a"
 dependencies = [
  "bytes",
  "flex-error",
@@ -2205,9 +2208,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.50.0"
+version = "1.51.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "27ad5e34374e03cfffefc301becb44e9dc3c17584f414349ebe29ed26661822d"
+checksum = "2bd1c4c0fc4a7ab90fc15ef6daaa3ec3b893f004f915f2392557ed23237820cd"
 dependencies = [
  "bytes",
  "libc",
@@ -2220,9 +2223,9 @@ dependencies = [
 
 [[package]]
 name = "tokio-macros"
-version = "2.6.1"
+version = "2.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5c55a2eff8b69ce66c84f85e1da1c233edc36ceb85a2058d11b0d6a3c7e7569c"
+checksum = "385a6cb71ab9ab790c5fe8d67f1645e6c450a7ce006a33de03daa956cf70a496"
 dependencies = [
  "proc-macro2",
  "quote",
