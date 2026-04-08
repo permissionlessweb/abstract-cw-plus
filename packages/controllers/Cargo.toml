@@ -11,10 +11,10 @@ homepage = "https://cosmwasm.com"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cosmwasm-schema = { path = "../../../ZK/cw/zk-cosmwasm/packages/schema" }
-cosmwasm-std = { path = "../../../ZK/cw/zk-cosmwasm/packages/std" }
-cw-utils = { path = "../../../ZK/cw/zk-cw-minus/packages/cw-utils" }
-cw-storage-plus = { path = "../../../ZK/cw/zk-storage-plus" }
+cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
+cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
+cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
+cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "zk-mvp" }
 schemars         = { version = "0.8.22" }
 serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
 thiserror        = { version = "1.0.69" }

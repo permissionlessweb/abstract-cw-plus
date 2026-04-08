@@ -23,26 +23,26 @@ library = [
 ]
 
 [dependencies]
-cosmwasm-std = { path = "../../../ZK/cw/zk-cosmwasm/packages/std" }
-cw-utils = { path = "../../../ZK/cw/zk-cw-minus/packages/cw-utils" }
-cosmwasm-schema = { path = "../../../ZK/cw/zk-cosmwasm/packages/schema" }
-cw-controllers = { path = "../../../ZK/cw/zk-cw-minus/packages/controllers" }
+cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
+cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
+cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
+cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
 
-cw1 = { path = "../../../cw-plus/packages/cw1" }
-cw1-subkeys = { path = "../../../cw-plus/contracts/cw1-subkeys" }
-cw1-whitelist = { path = "../../../cw-plus/contracts/cw1-whitelist" }
-cw3 = { path = "../../../cw-plus/packages/cw3" }
-cw3-fixed-multisig = { path = "../../../cw-plus/contracts/cw3-fixed-multisig" }
-cw3-flex-multisig = { path = "../../../cw-plus/contracts/cw3-flex-multisig" }
-cw4 = { path = "../../../cw-plus/packages/cw4" }
-cw4-group = { path = "../../../cw-plus/contracts/cw4-group" }
-cw4-stake = { path = "../../../cw-plus/contracts/cw4-stake" }
-cw20 = { path = "../../../cw-plus/packages/cw20" }
-cw20-base = { path = "../../../cw-plus/contracts/cw20-base" }
-cw20-ics20 = { path = "../../../cw-plus/contracts/cw20-ics20" }
+cw1 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw1-subkeys = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw1-whitelist = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw3 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw3-fixed-multisig = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw3-flex-multisig = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw4 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw4-group = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw4-stake = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw20 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw20-base = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
+cw20-ics20 = { git = "https://github.com/permissionlessweb/cw-plus", branch = "zk-mvp" }
 
-cw-orch = { path = "../../../cw-orchestrator/cw-orch" }
+cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
 cw-orch-from-interface-derive = { version = "0.1.0", path = "../from-interface-derive" }
 
 [dev-dependencies]
-cw-orch-interchain = { path = "../../../cw-orchestrator/cw-orch-interchain" }
+cw-orch-interchain = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
