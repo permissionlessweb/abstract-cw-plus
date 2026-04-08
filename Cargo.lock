@@ -5,7 +5,7 @@ version = 4
 [[package]]
 name = "abstract-cw-multi-test"
 version = "3.0.0-rc"
-source = "git+https://github.com/permissionlessweb/cw-multi-test-fork?branch=bump%2Fcw3%2Fofficial-ibc-fork#b8f72f4f89cc46a2aff09d785e1f7a0e781fce45"
+source = "git+https://github.com/permissionlessweb/cw-multi-test-fork?branch=bump%2Fcw3%2Fofficial-ibc-fork#74c12ab685231ca5c9429dbc92dd5e7870d9f921"
 dependencies = [
  "bech32",
  "cosmwasm-schema",
@@ -495,7 +495,7 @@ dependencies = [
 [[package]]
 name = "cosmos-sdk-proto"
 version = "0.28.0"
-source = "git+https://github.com/permissionlessweb/cosmos-rust?branch=main#2017200e4180dec8ed19fdc0cd633279d6b3c6f9"
+source = "git+https://github.com/permissionlessweb/cosmos-rust?branch=main#51a9e50dda277801d3abd7ff0d332d37fbc25a91"
 dependencies = [
  "bytes",
  "http-body-util",
@@ -697,7 +697,7 @@ dependencies = [
 [[package]]
 name = "cw-controllers"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#47c2b4c18f6d9b7e1b607dc21ee29d7756dc6f06"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -711,7 +711,7 @@ dependencies = [
 [[package]]
 name = "cw-multi-test"
 version = "3.0.1"
-source = "git+https://github.com/permissionlessweb/cw-multi-test?branch=mvp#820892f44fa5beb43eb66be7a5441c18bc43c02d"
+source = "git+https://github.com/permissionlessweb/cw-multi-test?branch=mvp#81b4685faa61e8110d5dfd95acc9e4fa0bc9a423"
 dependencies = [
  "bech32",
  "cosmwasm-schema",
@@ -728,7 +728,7 @@ dependencies = [
 [[package]]
 name = "cw-orch"
 version = "0.30.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "anyhow",
  "cosmwasm-std",
@@ -748,7 +748,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-contract-derive"
 version = "0.21.1"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "convert_case",
  "quote",
@@ -758,7 +758,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-core"
 version = "2.1.4"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "abstract-cw-multi-test",
  "anyhow",
@@ -777,7 +777,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-fns-derive"
 version = "0.23.1"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "convert_case",
  "proc-macro2",
@@ -797,7 +797,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-mock"
 version = "0.24.4"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "abstract-cw-multi-test",
  "cosmos-sdk-proto",
@@ -812,7 +812,7 @@ dependencies = [
 [[package]]
 name = "cw-orch-traits"
 version = "0.25.0"
-source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#c613d61d1148239385b14f59d0c2c50468e5d837"
+source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=cw3#ec4d693aad80ee70ddbd77c3b78c9807bedb6be0"
 dependencies = [
  "cw-orch-core",
  "prost-types",
@@ -858,7 +858,7 @@ dependencies = [
 [[package]]
 name = "cw-utils"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#47c2b4c18f6d9b7e1b607dc21ee29d7756dc6f06"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
@@ -882,7 +882,7 @@ dependencies = [
 [[package]]
 name = "cw2"
 version = "3.0.0"
-source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#47c2b4c18f6d9b7e1b607dc21ee29d7756dc6f06"
+source = "git+https://github.com/permissionlessweb/cw-minus?branch=main#3dcc39ed9c9199b08fff90b9e4a57b464ccc855f"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",
