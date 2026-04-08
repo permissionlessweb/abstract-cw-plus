@@ -1,7 +1,7 @@
 #[cfg(not(feature = "library"))]
 use cosmwasm_std::entry_point;
 use cosmwasm_std::{
-    from_json, to_json_binary, Addr, Binary, Deps, DepsMut, Env, IbcMsg, IbcQuery, MessageInfo,
+    from_json, to_json_binary, Addr, Binary, Deps, DepsMut, Env, IbcMsg, IbcQuery, MessageInfo,MigrateInfo,
     Order, PortIdResponse, Response, StdError, StdResult,
 };
 use semver::Version;
@@ -209,7 +209,7 @@ const MIGRATE_VERSION_2: &str = "0.12.0-alpha1";
 const MIGRATE_VERSION_3: &str = "0.13.0";
 
 #[cfg_attr(not(feature = "library"), entry_point)]
-pub fn migrate(mut deps: DepsMut, env: Env, msg: MigrateMsg) -> Result<Response, ContractError> {
+pub fn migrate(mut deps: DepsMut, env: Env, msg: MigrateMsg, _info: MigrateInfo) -> Result<Response, ContractError> {
     let version: Version = CONTRACT_VERSION.parse().map_err(from_semver)?;
     let stored = get_contract_version(deps.storage)?;
     let storage_version: Version = stored.version.parse().map_err(from_semver)?;

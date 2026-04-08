@@ -27,14 +27,14 @@ library = []
 
 
 [dependencies]
-cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
-cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
+cosmwasm-schema = { path = "../../../ZK/cw/zk-cosmwasm/packages/schema" }
+cw-utils = { path = "../../../ZK/cw/zk-cw-minus/packages/cw-utils" }
 abstract-cw2 = { version = "1.2.2", path = "../../packages/cw2" }
 abstract-cw4 = { version = "1.2.2", path = "../../packages/cw4" }
 abstract-cw20 = { version = "3.0.0", path = "../../packages/cw20" }
-cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
-cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "mvp" }
-cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+cw-controllers = { path = "../../../ZK/cw/zk-cw-minus/packages/controllers" }
+cw-storage-plus = { path = "../../../ZK/cw/zk-storage-plus" }
+cosmwasm-std = { path = "../../../ZK/cw/zk-cosmwasm/packages/std" }
 schemars = "0.8"
 serde = { version = "1.0.219", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0.69" }

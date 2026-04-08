@@ -11,12 +11,12 @@ homepage = "https://cosmwasm.com"
 [features]
 
 [dependencies]
-cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
-cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
-cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+cw-utils = { path = "../../../ZK/cw/zk-cw-minus/packages/cw-utils" }
+cosmwasm-schema = { path = "../../../ZK/cw/zk-cosmwasm/packages/schema" }
+cosmwasm-std = { path = "../../../ZK/cw/zk-cosmwasm/packages/std" }
 schemars         = { version = "0.8.22" }
 serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
 cw-orch          = { workspace = true }
 
 [dev-dependencies]
-cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+cosmwasm-schema = { path = "../../../ZK/cw/zk-cosmwasm/packages/schema" }
