@@ -17,14 +17,14 @@ crate-type = ["cdylib", "rlib"]
 library = []
 
 [dependencies]
-cosmwasm-schema  = { version = "3.0.0" }
-cw-utils         = { version = "3.0.0" }
-cw2              = { version = "3.0.0" }
+cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
+cw2 = { git = "https://github.com/permissionlessweb/cw-minus", branch = "main" }
 abstract-cw2     = { version = "1.2.2", path = "../../packages/cw2" }
 abstract-cw20    = { version = "3.0.0", path = "../../packages/cw20" }
-cw-storage-plus  = { version = "3.0.0" }
-cosmwasm-std     = { version = "3.0.0" }
-schemars         = { version = "0.8.4" }
+cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "mvp" }
+cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+schemars         = { version = "0.8.22" }
 semver           = { version = "1" }
 serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
 thiserror        = { version = "1.0.69" }
@@ -32,4 +32,4 @@ cw-orch          = { workspace = true }
 
 [dev-dependencies]
 easy-addr        = { workspace = true }
-cw-multi-test    = { version = "3.0.1" }
+cw-multi-test = { git = "https://github.com/permissionlessweb/cw-multi-test", branch = "mvp" }

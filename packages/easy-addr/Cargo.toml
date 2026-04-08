@@ -8,8 +8,8 @@ publish = false
 proc-macro = true
 
 [dependencies]
-cosmwasm-schema = { version = "3.0.0" }
-cosmwasm-std = { version = "3.0.0" }
+cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
+cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "mvp" }
 proc-macro2 = "1"
 quote = "1"
 syn = { version = "1.0.6", features = ["full", "printing", "extra-traits"] }
