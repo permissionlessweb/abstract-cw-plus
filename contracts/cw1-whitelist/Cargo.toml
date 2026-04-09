@@ -33,5 +33,5 @@ cw-orch          = { workspace = true }
 easy-addr        = { workspace = true }
 anyhow           = { version = "1" }
 assert_matches   = { version = "1" }
-cw-multi-test = { path = "../../../cw-multi-test-fork" }
+cw-multi-test = { package = "abstract-cw-multi-test", path = "../../../cw-multi-test-fork" }
 derivative       = { version = "2" }

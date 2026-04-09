@@ -33,4 +33,4 @@ cw-orch          = { workspace = true }
 easy-addr        = { workspace = true }
 abstract-cw20    = { version = "3.0.0", path = "../../packages/cw20" }
 abstract-cw20-base = { version = "3.0.0", path = "../cw20-base", features = ["library"] }
-cw-multi-test = { path = "../../../cw-multi-test-fork", features = ["cosmwasm_3_0"] }
+cw-multi-test = { package = "abstract-cw-multi-test", path = "../../../cw-multi-test-fork", features = ["cosmwasm_3_0"] }

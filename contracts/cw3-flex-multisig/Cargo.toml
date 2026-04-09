@@ -34,5 +34,5 @@ cw-orch                   = { workspace = true }
 
 [dev-dependencies]
 abstract-cw4-group       = { version = "3.0.0", path = "../cw4-group" }
-cw-multi-test = { path = "../../../cw-multi-test-fork" }
+cw-multi-test = { package = "abstract-cw-multi-test", path = "../../../cw-multi-test-fork" }
 abstract-cw20-base       = { version = "3.0.0", path = "../cw20-base" }
