@@ -18,20 +18,20 @@ library = []
 test-utils = []
 
 [dependencies]
-cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
-cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
 abstract-cw1     = { version = "1.2.2", path = "../../packages/cw1" }
 abstract-cw2     = { version = "1.2.2", path = "../../packages/cw2" }
+cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
 cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp", features = ["staking"] }
+cw-orch          = { workspace = true }
 cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "zk-mvp" }
+cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
 schemars         = { version = "0.8.22" }
 serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
 thiserror        = { version = "1.0.69" }
-cw-orch          = { workspace = true }
 
 [dev-dependencies]
-easy-addr        = { workspace = true }
 anyhow           = { version = "1" }
 assert_matches   = { version = "1" }
-cw-multi-test = { package = "abstract-cw-multi-test", path = "../../../cw-multi-test-fork" }
+cw-multi-test = { package = "abstract-cw-multi-test", git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
 derivative       = { version = "2" }
+easy-addr        = { workspace = true }

@@ -5,28 +5,6 @@ version = 4
 [[package]]
 name = "abstract-cw-multi-test"
 version = "3.0.0-rc"
-dependencies = [
- "bech32",
- "cosmwasm-schema",
- "cosmwasm-std",
- "cw-storage-plus",
- "cw-utils",
- "cw20-ics20",
- "hex",
- "itertools 0.14.0",
- "log",
- "prost",
- "schemars 0.8.22",
- "serde",
- "serde_json",
- "sha2",
- "thiserror 1.0.69",
- "tiny-keccak",
-]
-
-[[package]]
-name = "abstract-cw-multi-test"
-version = "3.0.0-rc"
 source = "git+https://github.com/permissionlessweb/cw-multi-test-fork?branch=zk-mvp#2339e4cfbe5c7b5896b25bb10bc4decd3db98249"
 dependencies = [
  "bech32",
@@ -80,7 +58,7 @@ dependencies = [
 name = "abstract-cw1-whitelist"
 version = "3.0.0"
 dependencies = [
- "abstract-cw-multi-test 3.0.0-rc",
+ "abstract-cw-multi-test",
  "abstract-cw1",
  "abstract-cw2",
  "anyhow",
@@ -125,7 +103,7 @@ dependencies = [
 name = "abstract-cw20-base"
 version = "3.0.0"
 dependencies = [
- "abstract-cw-multi-test 3.0.0-rc",
+ "abstract-cw-multi-test",
  "abstract-cw2",
  "abstract-cw20",
  "cosmwasm-schema",
@@ -177,7 +155,7 @@ dependencies = [
 name = "abstract-cw3-fixed-multisig"
 version = "3.0.0"
 dependencies = [
- "abstract-cw-multi-test 3.0.0-rc",
+ "abstract-cw-multi-test",
  "abstract-cw2",
  "abstract-cw20",
  "abstract-cw20-base",
@@ -197,7 +175,7 @@ dependencies = [
 name = "abstract-cw3-flex-multisig"
 version = "3.0.0"
 dependencies = [
- "abstract-cw-multi-test 3.0.0-rc",
+ "abstract-cw-multi-test",
  "abstract-cw2",
  "abstract-cw20",
  "abstract-cw20-base",
@@ -765,7 +743,7 @@ name = "cw-orch-core"
 version = "2.1.4"
 source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=zk-mvp#5c24932c40a9c64c1e6e6806f84739ebfb2f4ae7"
 dependencies = [
- "abstract-cw-multi-test 3.0.0-rc (git+https://github.com/permissionlessweb/cw-multi-test-fork?branch=zk-mvp)",
+ "abstract-cw-multi-test",
  "anyhow",
  "cosmos-sdk-proto",
  "cosmwasm-std",
@@ -804,7 +782,7 @@ name = "cw-orch-mock"
 version = "0.24.4"
 source = "git+https://github.com/permissionlessweb/cw-orchestrator?branch=zk-mvp#5c24932c40a9c64c1e6e6806f84739ebfb2f4ae7"
 dependencies = [
- "abstract-cw-multi-test 3.0.0-rc (git+https://github.com/permissionlessweb/cw-multi-test-fork?branch=zk-mvp)",
+ "abstract-cw-multi-test",
  "cosmos-sdk-proto",
  "cosmwasm-std",
  "cw-orch-core",
