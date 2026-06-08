@@ -18,18 +18,18 @@ crate-type = ["cdylib", "rlib"]
 library = []
 
 [dependencies]
-cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
-cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
 abstract-cw2     = { version = "1.2.2", path = "../../packages/cw2" }
 abstract-cw20    = { version = "3.0.0", path = "../../packages/cw20" }
-cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp", features = ["stargate"] }
-cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "zk-mvp" }
-cw-controllers = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
+cosmwasm-schema = { path = "../../../cosmwasm/packages/schema" }
+cosmwasm-std = { path = "../../../cosmwasm/packages/std", features = ["stargate"] }
+cw-controllers = { path = "../../../cw-minus/packages/controllers" }
+cw-orch          = { workspace = true }
+cw-storage-plus = { path = "../../../cw-storage-plus" }
+cw-utils = { path = "../../../cw-minus/packages/cw-utils" }
 schemars         = { version = "0.8.22" }
 semver           = { version = "1" }
 serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
 thiserror        = { version = "1.0.69" }
-cw-orch          = { workspace = true }
 
 [dev-dependencies]
 easy-addr        = { workspace = true }

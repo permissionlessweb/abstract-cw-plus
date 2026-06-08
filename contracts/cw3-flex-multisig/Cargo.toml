@@ -23,11 +23,11 @@ abstract-cw20             = { version = "3.0.0", path = "../../packages/cw20" }
 abstract-cw3              = { version = "3.0.0", path = "../../packages/cw3" }
 abstract-cw3-fixed-multisig = { version = "3.0.0", path = "../cw3-fixed-multisig", features = ["library"] }
 abstract-cw4              = { version = "1.2.2", path = "../../packages/cw4" }
-cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
-cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
+cosmwasm-schema = { path = "../../../cosmwasm/packages/schema" }
+cosmwasm-std = { path = "../../../cosmwasm/packages/std" }
 cw-orch                   = { workspace = true }
-cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "zk-mvp" }
-cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
+cw-storage-plus = { path = "../../../cw-storage-plus" }
+cw-utils = { path = "../../../cw-minus/packages/cw-utils" }
 schemars                  = { version = "0.8.22" }
 serde                     = { version = "1.0.219", default-features = false, features = ["derive"] }
 thiserror                 = { version = "1.0.69" }
@@ -35,4 +35,4 @@ thiserror                 = { version = "1.0.69" }
 [dev-dependencies]
 abstract-cw20-base       = { version = "3.0.0", path = "../cw20-base" }
 abstract-cw4-group       = { version = "3.0.0", path = "../cw4-group" }
-cw-multi-test = { package = "abstract-cw-multi-test", git = "https://github.com/permissionlessweb/cw-multi-test-fork", branch = "zk-mvp" }
+cw-multi-test = { package = "abstract-cw-multi-test", path = "../../../cw-multi-test-fork" }

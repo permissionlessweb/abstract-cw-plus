@@ -1,9 +1,21 @@
 [workspace]
-members = ["packages/*", "contracts/*"]
+members = ["contracts/*", "packages/*"]
 exclude = ["packages/cw-plus-orch"]
 
 # Resolver has to be set explicitely in workspaces, see https://github.com/rust-lang/cargo/issues/9956
 resolver = "2"
+
+[workspace.dependencies]
+cw-orch = { path = "../cw-orchestrator/cw-orch" }
+easy-addr = { version = "3.0.0", path = "packages/easy-addr" }
+
+[profile.release]
+rpath = false
+lto = true
+overflow-checks = true
+opt-level = 3
+debug = false
+debug-assertions = false
 
 [profile.release.package.cw1-subkeys]
 codegen-units = 1
@@ -36,16 +48,3 @@ incremental = false
 [profile.release.package.cw20-ics20]
 codegen-units = 1
 incremental = false
-
-[profile.release]
-rpath = false
-lto = true
-overflow-checks = true
-opt-level = 3
-debug = false
-debug-assertions = false
-
-
-[workspace.dependencies]
-cw-orch = { git = "https://github.com/permissionlessweb/cw-orchestrator", branch = "zk-mvp" }
-easy-addr = {version = "3.0.0" , path = "packages/easy-addr" }

@@ -18,19 +18,19 @@ library = []
 test-utils = []
 
 [dependencies]
-cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
-cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
 abstract-cw1           = { version = "1.2.2", path = "../../packages/cw1" }
-abstract-cw2           = { version = "1.2.2", path = "../../packages/cw2" }
 abstract-cw1-whitelist = { version = "3.0.0", path = "../cw1-whitelist", features = ["library"] }
-cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp", features = ["staking"] }
-cw-storage-plus = { git = "https://github.com/permissionlessweb/cw-storage-plus", branch = "zk-mvp" }
+abstract-cw2           = { version = "1.2.2", path = "../../packages/cw2" }
+cosmwasm-schema = { path = "../../../cosmwasm/packages/schema" }
+cosmwasm-std = { path = "../../../cosmwasm/packages/std", features = ["staking"] }
+cw-orch                = { workspace = true }
+cw-storage-plus = { path = "../../../cw-storage-plus" }
+cw-utils = { path = "../../../cw-minus/packages/cw-utils" }
 schemars               = { version = "0.8.22" }
+semver                 = { version = "1" }
 serde                  = { version = "1.0.219", default-features = false, features = ["derive"] }
 thiserror              = { version = "1.0.69" }
-semver                 = { version = "1" }
-cw-orch                = { workspace = true }
 
 [dev-dependencies]
-easy-addr              = { workspace = true }
 abstract-cw1-whitelist = { path = "../cw1-whitelist", features = ["library", "test-utils"] }
+easy-addr              = { workspace = true }

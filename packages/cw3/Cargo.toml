@@ -9,10 +9,10 @@ repository = "https://github.com/CosmWasm/cw-plus"
 homepage = "https://cosmwasm.com"
 
 [dependencies]
-cw-utils = { git = "https://github.com/permissionlessweb/cw-minus", branch = "zk-mvp" }
 abstract-cw20    = { version = "3.0.0", path = "../../packages/cw20" }
-cosmwasm-schema = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
-cosmwasm-std = { git = "https://github.com/permissionlessweb/cosmwasm", branch = "zk-mvp" }
+cosmwasm-schema = { path = "../../../cosmwasm/packages/schema" }
+cosmwasm-std = { path = "../../../cosmwasm/packages/std" }
+cw-utils = { path = "../../../cw-minus/packages/cw-utils" }
 schemars         = { version = "0.8.22" }
 serde            = { version = "1.0.219", default-features = false, features = ["derive"] }
 thiserror        = { version = "1.0.69" }
